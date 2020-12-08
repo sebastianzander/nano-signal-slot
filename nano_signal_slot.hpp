@@ -157,6 +157,12 @@ class Signal<RT(Args...), MT_Policy> final : public Observer<MT_Policy>
         observer::template for_each_accumulate<function, Accumulate>
             (std::forward<Accumulate>(accumulate), std::forward<Uref>(args)...);
     }
+
+    template <typename... Uref>
+    void operator ()(Uref&&... args)
+    {
+        observer::template for_each<function>(std::forward<Uref>(args)...);
+    }
 };
 
 } // namespace Nano ------------------------------------------------------------
